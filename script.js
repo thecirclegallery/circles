@@ -2,9 +2,9 @@
 document.addEventListener('contextmenu', (e) => e.preventDefault());
 
 // 2. Dragging Logic
-const circles = document.querySelectorAll('.art-circle');
+const squares = document.querySelectorAll('.art-square');
 
-circles.forEach(circle => {
+squares.forEach(square => {
     let isDragging = false;
     let startX, startY;
 
@@ -13,9 +13,9 @@ circles.forEach(circle => {
         const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
         const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
         
-        startX = clientX - circle.offsetLeft;
-        startY = clientY - circle.offsetTop;
-        circle.style.zIndex = 1000; // Bring to front
+        startX = clientX - square.offsetLeft;
+        startY = clientY - square.offsetTop;
+        square.style.zIndex = 1000; // Bring to front
     };
 
     const moveDrag = (e) => {
@@ -25,15 +25,28 @@ circles.forEach(circle => {
         const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
         const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
 
-        circle.style.left = `${clientX - startX}px`;
-        circle.style.top = `${clientY - startY}px`;
+        square.style.left = `${clientX - startX}px`;
+        square.style.top = `${clientY - startY}px`;
     };
 
     const stopDrag = () => {
         isDragging = false;
         // Reset z-index slightly so others can be picked up, 
         // but keep the last moved one relatively high
-        circles.forEach(c => { if(c !== circle) c.style.zIndex = 1; });
+        squares.forEach(s => { if(s !== square) s.style.zIndex = 1; });
+        square.style.zIndex = 500;
+    };
+
+    // Mouse Events
+    square.addEventListener('mousedown', startDrag);
+    document.addEventListener('mousemove', moveDrag);
+    document.addEventListener('mouseup', stopDrag);
+
+    // Touch Events (Mobile)
+    square.addEventListener('touchstart', startDrag);
+    document.addEventListener('touchmove', moveDrag, { passive: false });
+    document.addEventListener('touchend', stopDrag);
+});
         circle.style.zIndex = 500;
     };
 
