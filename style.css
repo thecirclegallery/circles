@@ -1,55 +1,101 @@
-/* Gentle Space Atmosphere */
+/* Deep Space Background */
 body, html {
     margin: 0;
     padding: 0;
-    width: 100%;
-    height: 100%;
-    /* A deep, soft twilight purple/black */
-    background: linear-gradient(135deg, #11091a 0%, #241536 100%);
-    overflow: hidden; 
-    user-select: none; 
-}
-
-#gallery-container {
-    width: 100vw;
+    background: radial-gradient(circle at 50% 50%, #2a1b38 0%, #11091a 100%);
+    color: #ffb6c1;
+    font-family: 'Courier New', Courier, monospace; /* Technical, archive feel */
     height: 100vh;
-    position: relative;
-    /* Soft pink and white stardust pattern */
-    background-image: 
-        radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.6) 1px, transparent 2px),
-        radial-gradient(circle at 85% 30%, rgba(255, 182, 193, 0.6) 1px, transparent 2px),
-        radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.6) 1px, transparent 2px),
-        radial-gradient(circle at 20% 10%, rgba(255, 182, 193, 0.4) 2px, transparent 3px),
-        radial-gradient(circle at 75% 70%, rgba(255, 255, 255, 0.4) 2px, transparent 3px);
-    background-size: 150px 150px; 
-}
-
-/* The Kawaii Squares */
-.art-square {
-    position: absolute;
-    width: 250px; /* Adjust size as needed */
-    height: 250px;
-    border-radius: 12px; /* Soft, gentle corners */
-    border: 2px solid #ffb6c1; /* Soft pink border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
-    cursor: grab;
-    /* Very slight glass effect */
-    background: rgba(255, 255, 255, 0.03); 
-    /* Gentle pink glow */
-    box-shadow: 0 4px 20px rgba(255, 182, 193, 0.15); 
-    touch-action: none; 
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    user-select: none;
 }
 
-.art-square img {
+/* The Main Console Interface */
+.console-container {
+    background: #fff0f5; /* Soft lavender blush */
+    width: 90vw;
+    max-width: 500px;
+    border: 2px solid #ffb6c1;
+    border-radius: 8px;
+    box-shadow: 0 0 25px rgba(255, 182, 193, 0.2);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* The Top Bar */
+.console-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px dashed #ffb6c1;
+    padding-bottom: 10px;
+    color: #d87093;
+    font-weight: bold;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* The Main Square Canvas */
+.main-screen {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Keeps it a perfect square */
+    background: #ffffff;
+    border: 1px solid #ffb6c1;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+#main-art {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    pointer-events: none; 
     -webkit-user-drag: none;
 }
 
-/* The Security Overlay */
+/* The Bottom Scrollable Track */
+.archive-track {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto; /* Allows scrolling if you add many thumbnails */
+    padding-bottom: 5px;
+    scrollbar-width: thin;
+    scrollbar-color: #ffb6c1 #fff0f5;
+}
+
+/* Individual Thumbnails */
+.thumb-wrapper {
+    position: relative;
+    width: 65px;
+    height: 65px;
+    flex-shrink: 0;
+    cursor: pointer;
+    border: 3px solid transparent;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    opacity: 0.6; /* Unselected items are slightly faded */
+}
+
+/* When a thumbnail is clicked */
+.thumb-wrapper.active {
+    border-color: #ff69b4; /* Hot pink highlight */
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Security Layers */
 .protection-overlay {
     position: absolute;
     top: 0;
@@ -57,76 +103,5 @@ body, html {
     width: 100%;
     height: 100%;
     background: transparent;
-    z-index: 10; 
-}
-
-/* What happens when you pick a square up */
-.art-square:active {
-    cursor: grabbing;
-    transform: scale(1.02); /* Slight lift */
-    /* Glows brighter pink when held */
-    box-shadow: 0 8px 30px rgba(255, 182, 193, 0.4); 
-    z-index: 1000;
-}
-
-/* --- Focus Mode (Lightbox) --- */
-#lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(17, 9, 26, 0.85); /* Deep space dark with transparency */
-    backdrop-filter: blur(8px); /* Frosted glass effect */
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-}
-
-#lightbox.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-#lightbox-content {
-    background: #fff0f5; /* Clean, soft pink/white base */
-    padding: 12px;
-    border: 1px solid #ffb6c1;
-    border-radius: 4px;
-    box-shadow: 0 0 30px rgba(255, 182, 193, 0.3);
-    max-width: 90vw;
-    max-height: 85vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#lightbox-img {
-    max-width: 100%;
-    max-height: 70vh;
-    object-fit: contain;
-    border-radius: 2px;
-    -webkit-user-drag: none;
-}
-
-#close-btn {
-    margin-top: 15px;
-    background: transparent;
-    border: 1px dashed #ffb6c1;
-    color: #4a4a4a;
-    font-family: 'Courier New', Courier, monospace; /* Sleek, terminal feel */
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    padding: 8px 20px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-#close-btn:hover {
-    background: #ffb6c1;
-    color: #fff;
-    border-style: solid;
+    z-index: 10;
 }
