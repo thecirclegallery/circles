@@ -1,101 +1,139 @@
-/* Deep Space Background */
+/* new ui */
+* {
+    box-sizing: border-box;
+}
+
 body, html {
     margin: 0;
     padding: 0;
-    background: radial-gradient(circle at 50% 50%, #2a1b38 0%, #11091a 100%);
-    color: #ffb6c1;
-    font-family: 'Courier New', Courier, monospace; /* Technical, archive feel */
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    user-select: none;
-}
-
-/* The Main Console Interface */
-.console-container {
-    background: #fff0f5; /* Soft lavender blush */
-    width: 90vw;
-    max-width: 500px;
-    border: 2px solid #ffb6c1;
-    border-radius: 8px;
-    box-shadow: 0 0 25px rgba(255, 182, 193, 0.2);
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-/* The Top Bar */
-.console-header {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 2px dashed #ffb6c1;
-    padding-bottom: 10px;
-    color: #d87093;
-    font-weight: bold;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-}
-
-/* The Main Square Canvas */
-.main-screen {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1 / 1; /* Keeps it a perfect square */
-    background: #ffffff;
-    border: 1px solid #ffb6c1;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-}
-
-#main-art {
     width: 100%;
     height: 100%;
+    /* Pastel blue to pastel pink retro gradient */
+    background: linear-gradient(135deg, #bde0fe 0%, #ffc0cb 100%);
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden; /* It's a desktop, so the screen itself doesn't scroll */
+}
+
+/* CRT Monitor Effect */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%);
+    background-size: 100% 4px;
+    z-index: 999;
+    pointer-events: none; /* Lets you click through the lines */
+}
+
+/* --- The Desktop Icons --- */
+.desktop {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap; /* This makes the icons drop to the next line on small screens */
+    gap: 20px;
+    align-content: flex-start;
+    height: 100%;
+    overflow-y: auto; /* Lets you scroll down if you have 50+ icons */
+}
+
+.file-icon {
+    width: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    gap: 5px;
+    z-index: 10;
+}
+
+.file-icon img {
+    width: 60px;
+    height: 60px;
     object-fit: cover;
+    border: 2px solid #fff;
+    border-radius: 8px; /* Cute, slightly rounded icons */
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+    transition: transform 0.1s;
     -webkit-user-drag: none;
 }
 
-/* The Bottom Scrollable Track */
-.archive-track {
+.file-icon:active img {
+    transform: scale(0.9); /* Little click animation */
+}
+
+.file-name {
+    font-size: 0.65rem;
+    color: #fff;
+    background: rgba(0,0,0,0.3);
+    padding: 2px 4px;
+    border-radius: 3px;
+    word-break: break-all;
+    text-align: center;
+}
+
+/* --- The Retro OS Window --- */
+#image-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw; /* Adapts to any phone screen size */
+    max-width: 500px;
+    background: #fff;
+    border: 2px solid #bde0fe;
+    box-shadow: 6px 6px 0px #ffb6c1; /* Retro block shadow */
+    z-index: 1000;
     display: flex;
-    gap: 10px;
-    overflow-x: auto; /* Allows scrolling if you add many thumbnails */
-    padding-bottom: 5px;
-    scrollbar-width: thin;
-    scrollbar-color: #ffb6c1 #fff0f5;
+    flex-direction: column;
 }
 
-/* Individual Thumbnails */
-.thumb-wrapper {
-    position: relative;
-    width: 65px;
-    height: 65px;
-    flex-shrink: 0;
+#image-window.hidden {
+    display: none;
+}
+
+.window-header {
+    background: #bde0fe;
+    color: #4a4a4a;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    border-bottom: 2px solid #ffb6c1;
+    font-size: 0.8rem;
+}
+
+#close-btn {
+    background: #fff;
+    border: 1px solid #ffb6c1;
+    font-weight: bold;
     cursor: pointer;
-    border: 3px solid transparent;
-    border-radius: 6px;
-    overflow: hidden;
-    transition: all 0.2s ease;
-    opacity: 0.6; /* Unselected items are slightly faded */
+    color: #ff69b4;
+    padding: 2px 6px;
 }
 
-/* When a thumbnail is clicked */
-.thumb-wrapper.active {
-    border-color: #ff69b4; /* Hot pink highlight */
-    opacity: 1;
-    transform: translateY(-2px);
+#close-btn:active {
+    background: #ffb6c1;
+    color: #fff;
 }
 
-.thumb {
+.window-content {
+    padding: 10px;
+    background: #fff0f5;
+    position: relative;
+}
+
+.window-content img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-height: 70vh; /* Prevents the image from growing taller than your screen */
+    object-fit: contain; /* Shows the whole square without cropping */
+    display: block;
+    -webkit-user-drag: none;
 }
 
-/* Security Layers */
+/* Stops image saving */
 .protection-overlay {
     position: absolute;
     top: 0;
