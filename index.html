@@ -2,44 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>System: ANDROMEDA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANDROMEDA_OS</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <main class="console-container">
-        <!-- The cute, technical header -->
-        <header class="console-header">
-            <span>SYSTEM://ANDROMEDA</span>
-            <span>VENT_ARCHIVE</span>
-        </header>
+    <!-- Subtle Retro Screen Lines -->
+    <div class="scanlines"></div>
+
+    <!-- The Desktop where your icons live -->
+    <div class="desktop">
         
-        <!-- The Main Viewing Screen -->
-        <div class="main-screen">
-            <img id="main-art" src="pinkneon.JPG" alt="Andromeda Vent Space">
+        <!-- ART ICON 1 -->
+        <!-- Note: the 'data-src' is what tells the window which image to open -->
+        <div class="file-icon" data-src="pinkneon.JPG">
+            <img src="pinkneon.JPG" alt="Vent Art">
+            <span class="file-name">01_vent.dat</span>
+        </div>
+
+        <!-- ART ICON 2 (Just replace 'your-next-art.JPG') -->
+        <div class="file-icon" data-src="your-next-art.JPG">
+            <img src="your-next-art.JPG" alt="Vent Art">
+            <span class="file-name">02_vent.dat</span>
+        </div>
+
+    </div>
+
+    <!-- The Pop-Up Window (Hidden until an icon is clicked) -->
+    <div id="image-window" class="hidden">
+        <div class="window-header">
+            <span class="window-title">SYS.VIEWER // ANDROMEDA</span>
+            <button id="close-btn">[X]</button>
+        </div>
+        <div class="window-content">
+            <img id="window-img" src="" alt="Expanded Art">
             <div class="protection-overlay"></div>
         </div>
-
-        <!-- The Interactive Thumbnail Track -->
-        <div class="archive-track">
-            
-            <!-- Thumbnail 1 (Currently Active) -->
-            <div class="thumb-wrapper active">
-                <img class="thumb" src="pinkneon.JPG" alt="Art 1">
-                <div class="protection-overlay"></div>
-            </div>
-
-            <!-- Thumbnail 2 (Replace 'your-next-art.JPG' with your real file name) -->
-            <div class="thumb-wrapper">
-                <img class="thumb" src="your-next-art.JPG" alt="Art 2">
-                <div class="protection-overlay"></div>
-            </div>
-            
-            <!-- You can copy and paste the .thumb-wrapper block to add as many as you want! -->
-
-        </div>
-    </main>
+    </div>
 
     <script src="script.js"></script>
 </body>
