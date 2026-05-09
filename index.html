@@ -3,33 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Andromeda</title>
+    <title>System: ANDROMEDA</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="gallery-container">
-        <!-- square -->
-        <div class="art-square" style="top: 20%; left: 15%;">
-            <img src="pinkneon.JPG" alt="Vent Art">
+    <main class="console-container">
+        <!-- The cute, technical header -->
+        <header class="console-header">
+            <span>SYSTEM://ANDROMEDA</span>
+            <span>VENT_ARCHIVE</span>
+        </header>
+        
+        <!-- The Main Viewing Screen -->
+        <div class="main-screen">
+            <img id="main-art" src="pinkneon.JPG" alt="Andromeda Vent Space">
             <div class="protection-overlay"></div>
         </div>
 
-        <!-- Copy and paste this block to add more squares -->
-        <div class="art-square" style="top: 40%; left: 50%;">
-            <img src="your-next-image.JPG" alt="Vent Art">
-            <div class="protection-overlay"></div>
+        <!-- The Interactive Thumbnail Track -->
+        <div class="archive-track">
+            
+            <!-- Thumbnail 1 (Currently Active) -->
+            <div class="thumb-wrapper active">
+                <img class="thumb" src="pinkneon.JPG" alt="Art 1">
+                <div class="protection-overlay"></div>
+            </div>
+
+            <!-- Thumbnail 2 (Replace 'your-next-art.JPG' with your real file name) -->
+            <div class="thumb-wrapper">
+                <img class="thumb" src="your-next-art.JPG" alt="Art 2">
+                <div class="protection-overlay"></div>
+            </div>
+            
+            <!-- You can copy and paste the .thumb-wrapper block to add as many as you want! -->
+
         </div>
-        
-    </div>
-    <!-- Focus Mode Overlay -->
-    <div id="lightbox" class="hidden">
-        <div id="lightbox-content">
-            <img id="lightbox-img" src="" alt="Expanded Art">
-            <button id="close-btn">CLOSE [X]</button>
-        </div>
-    </div>
-    
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>
