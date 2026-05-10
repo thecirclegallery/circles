@@ -1,172 +1,153 @@
-* {
-    box-sizing: border-box;
-}
-
-body, html {
+/* --- Styling --- */
+body {
     margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    /* Soft glowing center gradient typical of 2000s wallpapers */
-    background: radial-gradient(circle at 50% 0%, #ffffff 0%, #ffe6ea 40%, #ffb6c1 100%);
-    font-family: 'Trebuchet MS', 'Lucida Grande', Tahoma, sans-serif; /* The quintessential 2000s web font */
-    overflow: hidden; 
-}
-
-/* --- The Desktop Icons --- */
-.desktop {
     padding: 20px;
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 25px;
-    align-content: flex-start;
-    height: 100%;
-    overflow-y: auto; 
+    /* Soft pink repeating grid pattern */
+    background-color: #ffe6ea;
+    background-image: linear-gradient(#ffc0cb 1px, transparent 1px), linear-gradient(90deg, #ffc0cb 1px, transparent 1px);
+    background-size: 20px 20px;
+    font-family: Tahoma, Verdana, sans-serif; /* Classic web font */
+    font-size: 12px; /* Small text was a staple of this era */
+    color: #555;
+    user-select: none; /* Stops text highlighting */
 }
 
-.file-icon {
-    width: 74px;
+/* --- Layout Wrapper --- */
+#site-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 2px solid #ffb6c1;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 5px 5px 0px rgba(255, 182, 193, 0.4);
+}
+
+/* --- Header Banner --- */
+#top-banner {
+    background-color: #fff0f5;
+    border: 2px dashed #ffb6c1;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+#top-banner h1 {
+    margin: 0;
+    color: #ff69b4;
+    font-size: 24px;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 0px #fff, 2px 2px 0px #ffb6c1;
+}
+
+#top-banner p {
+    margin: 5px 0 0 0;
+    font-style: italic;
+    color: #d87093;
+}
+
+/* --- Columns --- */
+#layout-columns {
+    display: flex;
+    flex-wrap: wrap; /* Allows it to stack on mobile */
+    gap: 15px;
+}
+
+#sidebar {
+    width: 200px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    gap: 8px;
-    z-index: 10;
+    gap: 15px;
 }
 
-/* Glossy Icon Container */
-.icon-glass {
+#main-content {
+    flex-grow: 1;
+    /* Forces it to take up the rest of the space, but drop down on small screens */
+    min-width: 250px; 
+}
+
+/* --- The Cute Boxes --- */
+.cute-box {
+    background-color: #fff;
+    border: 1px solid #ffb6c1;
+}
+
+.box-title {
+    background-color: #ffb6c1;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.box-content {
+    padding: 10px;
+    background-color: #fffafb;
+    border-top: 1px dashed #ffb6c1;
+}
+
+/* --- Sidebar Specifics --- */
+.profile-text p {
+    margin: 5px 0;
+}
+
+.links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.links-list a {
+    text-decoration: none;
+    color: #d87093;
+    font-weight: bold;
+    border-bottom: 1px dotted #ffb6c1;
+    padding-bottom: 2px;
+    transition: color 0.2s;
+}
+
+.links-list a:hover {
+    color: #ff1493;
+}
+
+/* --- Gallery Styling --- */
+.intro-text {
+    text-align: center;
+    color: #d87093;
+    margin-top: 0;
+}
+
+.gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.art-thumbnail {
     position: relative;
-    width: 64px;
-    height: 64px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15), inset 0 1px 2px rgba(255,255,255,0.9);
-    background: #fff;
-    padding: 2px;
+    width: 100px;
+    height: 100px;
+    border: 3px solid #fff;
+    outline: 1px solid #ffb6c1; /* Classic double-border trick */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
-/* The top-half reflection sheen */
-.icon-glass::after { 
-    content: ''; 
-    position: absolute; 
-    top: 0; left: 0; right: 0; 
-    height: 50%;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.1) 100%);
-    border-top-left-radius: 10px; 
-    border-top-right-radius: 10px; 
-    pointer-events: none;
+.art-thumbnail:hover {
+    transform: scale(1.05);
 }
 
-.icon-glass img {
+.art-thumbnail img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 10px;
     -webkit-user-drag: none;
-}
-
-/* Pill-shaped icon labels */
-.file-name {
-    font-size: 0.7rem;
-    color: #fff;
-    background: rgba(255, 182, 193, 0.8);
-    border: 1px solid rgba(255,255,255,0.6);
-    padding: 3px 8px;
-    border-radius: 12px;
-    text-shadow: 1px 1px 0 rgba(0,0,0,0.15);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    text-align: center;
-    word-break: break-all;
-}
-
-/* --- The 2008 Aero Glass Window --- */
-#image-window {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90vw; 
-    max-width: 500px;
-    /* Frosted glass border effect */
-    background: rgba(255, 255, 255, 0.3); 
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.8);
-    border-radius: 8px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,182,193,0.3);
-    z-index: 1000;
-    padding: 6px; /* Creates the thick glassy outer rim */
-}
-
-#image-window.hidden {
-    display: none;
-}
-
-.window-inner {
-    background: #fff;
-    border-radius: 4px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid rgba(255,182,193,0.5);
-}
-
-/* Classic 2000s two-toned glossy gradient */
-.window-header {
-    background: linear-gradient(to bottom, #ffffff 0%, #ffe6ea 45%, #ffb6c1 50%, #ffc0cb 100%);
-    color: #555;
-    padding: 6px 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.85rem;
-    font-weight: bold;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.8);
-    border-bottom: 1px solid #ffb6c1;
-}
-
-/* Round red gel close button */
-#close-btn {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: linear-gradient(to bottom, #ff99aa 0%, #ff5577 50%, #ff3355 51%, #ff1133 100%);
-    border: 1px solid #aa0022;
-    cursor: pointer;
-    box-shadow: inset 0 2px 2px rgba(255,255,255,0.6), 0 1px 2px rgba(0,0,0,0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#close-btn:active {
-    background: #cc0022;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
-}
-
-#close-btn::before {
-    content: 'x';
-    color: white;
-    font-family: sans-serif;
-    font-weight: bold;
-    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
-    position: relative;
-    top: -1px;
-}
-
-.window-content {
-    padding: 10px;
-    background: #fffafb;
-    position: relative;
-}
-
-.window-content img {
-    width: 100%;
-    max-height: 70vh; 
-    object-fit: contain; 
-    display: block;
-    -webkit-user-drag: none;
-    border: 1px solid #ffe6ea;
 }
 
 .protection-overlay {
@@ -177,4 +158,60 @@ body, html {
     height: 100%;
     background: transparent;
     z-index: 10;
+}
+
+/* --- Pop-up Lightbox --- */
+#lightbox {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(255, 230, 234, 0.9);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#lightbox.hidden {
+    display: none;
+}
+
+#lightbox-content {
+    background: #fff;
+    padding: 10px;
+    border: 2px solid #ffb6c1;
+    box-shadow: 5px 5px 0px #ffc0cb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+#lightbox-img {
+    max-width: 100%;
+    max-height: 75vh;
+    border: 1px dashed #ffb6c1;
+    margin-top: 10px;
+    -webkit-user-drag: none;
+}
+
+#close-btn {
+    background: #ffb6c1;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: Tahoma;
+}
+
+#close-btn:hover {
+    background: #ff69b4;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 600px) {
+    #sidebar {
+        width: 100%; /* Makes sidebar full width on small screens */
+    }
 }
