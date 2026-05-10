@@ -3,43 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANDROMEDA_OS</title>
+    <title>★ ANDROMEDA ★</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- The Desktop where your glossy icons live -->
-    <div class="desktop">
+    <div id="site-wrapper">
         
-        <!-- ART ICON 1 -->
-        <div class="file-icon" data-src="pinkneon.JPG">
-            <div class="icon-glass">
-                <img src="pinkneon.JPG" alt="Vent Art">
-            </div>
-            <span class="file-name">01_vent.dat</span>
-        </div>
+        <header id="top-banner">
+            <h1>*ೃ༄ ANDROMEDA ✧.*</h1>
+            <p>a gentle space for my vent circles</p>
+        </header>
 
-        <!-- ART ICON 2 (Replace 'your-next-art.JPG' with your real file name) -->
-        <div class="file-icon" data-src="your-next-art.JPG">
-            <div class="icon-glass">
-                <img src="your-next-art.JPG" alt="Vent Art">
-            </div>
-            <span class="file-name">02_vent.dat</span>
-        </div>
+        <div id="layout-columns">
+            
+            <aside id="sidebar">
+                
+                <div class="cute-box">
+                    <div class="box-title">🎀 Profile 🎀</div>
+                    <div class="box-content profile-text">
+                        <p><b>Name:</b> Andromeda</p>
+                        <p><b>Status:</b> Venting & Healing</p>
+                        <p>Welcome to my personal art space. Please be gentle.</p>
+                    </div>
+                </div>
 
+                <div class="cute-box">
+                    <div class="box-title">🧸 Navigation 🧸</div>
+                    <div class="box-content links-list">
+                        <a href="#">⟡ Home</a>
+                        <a href="#">⟡ My Circles</a>
+                        <a href="#">⟡ About Me</a>
+                    </div>
+                </div>
+
+            </aside>
+
+            <main id="main-content">
+                
+                <div class="cute-box">
+                    <div class="box-title">🌸 Vent Gallery 🌸</div>
+                    <div class="box-content">
+                        <p class="intro-text">Click on any circle to view it closer.</p>
+                        
+                        <div class="gallery-grid">
+                            
+                            <div class="art-thumbnail">
+                                <img src="pinkneon.JPG" alt="Vent Art 1" class="zoomable">
+                                <div class="protection-overlay"></div>
+                            </div>
+
+                            <div class="art-thumbnail">
+                                <img src="your-next-art.JPG" alt="Vent Art 2" class="zoomable">
+                                <div class="protection-overlay"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+        </div>
     </div>
 
-    <!-- The 2006 Aero Glass Pop-Up Window -->
-    <div id="image-window" class="hidden">
-        <div class="window-inner">
-            <div class="window-header">
-                <span class="window-title">System // Andromeda</span>
-                <button id="close-btn" title="Close"></button>
-            </div>
-            <div class="window-content">
-                <img id="window-img" src="" alt="Expanded Art">
-                <div class="protection-overlay"></div>
-            </div>
+    <div id="lightbox" class="hidden">
+        <div id="lightbox-content">
+            <button id="close-btn">✖ CLOSE</button>
+            <img id="lightbox-img" src="" alt="Expanded Art">
         </div>
     </div>
 
