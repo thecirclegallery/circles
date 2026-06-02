@@ -73,54 +73,54 @@
             background: #ffffff;
             position: relative;
             overflow: hidden;
-            transition: border-color 0.3s ease;
+            cursor: pointer;
+            transition: border-color 0.2s ease, transform 0.1s ease;
         }
 
+        /* Interactive Border Hover Style */
         .art-thumbnail:hover {
-            border-color: #7ba4db; /* Darkens slightly on hover */
+            border-color: #7ba4db; 
         }
 
+        /* Mechanical Click Response */
+        .art-thumbnail:active {
+            transform: scale(0.96); /* Physically pushes down slightly when clicked */
+        }
+
+        /* Fluid Zoom Interaction for Artwork */
         .art-thumbnail img {
             width: 100%;
             height: 100%;
             border-radius: 2px;
             object-fit: cover;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth easing */
         }
 
-        /* Tiny Bottom-Right Corner Watermark Container */
+        .art-thumbnail:hover img {
+            transform: scale(1.08); /* Art zooms smoothly inside the frame */
+        }
+
+        /* Medical Scanline Overlay Effect */
         .protection-overlay {
             position: absolute;
-            bottom: 8px;
-            right: 8px;
-            width: 65px;
-            height: 25px;
-            pointer-events: none; /* Allows clicks to pass through to the zoom script */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            padding: 2px 4px;
-            border-radius: 2px;
-            background-color: rgba(255, 255, 255, 0.4); /* Faint backing to separate from dark art pieces */
-            
-            /* Tiny Medical Cross on the left side of the container */
-            background-image: 
-                linear-gradient(to right, transparent 40%, rgba(123, 164, 219, 0.1) 40%, rgba(123, 164, 219, 0.1) 60%, transparent 60%),
-                linear-gradient(to bottom, transparent 40%, rgba(123, 164, 219, 0.1) 40%, rgba(123, 164, 219, 0.1) 60%, transparent 60%);
-            background-size: 12px 12px;
-            background-repeat: no-repeat;
-            background-position: left 4px center;
+            top: 4px;
+            left: -100%; /* Hidden off-screen left by default */
+            width: 100%;
+            height: calc(100% - 8px);
+            background: linear-gradient(
+                90deg, 
+                transparent, 
+                rgba(230, 240, 250, 0.4), 
+                transparent
+            );
+            pointer-events: none; /* Allows clicks to go directly to image */
+            transition: none;
         }
 
-        /* Faint Watermark Text pushed over next to the tiny cross */
-        .watermark-text {
-            color: rgba(97, 142, 199, 0.12); /* Dropped opacity further */
-            font-family: monospace;
-            font-size: 9px;
-            font-weight: bold;
-            letter-spacing: 0.3px;
-            user-select: none;
-            margin-left: 14px; /* Gives room for the background cross pattern */
+        /* Triggers the scanning light swipe animation on hover */
+        .art-thumbnail:hover .protection-overlay {
+            left: 100%;
+            transition: left 0.45s ease-in-out;
         }
 
         /* sidebar links */
@@ -135,7 +135,7 @@
             color: #618ec7 !important;
         }
 
-        /* Lightbox specific wrapper */
+        /* Lightbox adjustments */
         .lightbox-wrapper {
             position: relative;
             display: inline-block;
@@ -178,9 +178,7 @@
                             
                             <div class="art-thumbnail">
                                 <img src="pinkneon.JPG" alt="Vent Art 1" class="zoomable">
-                                <div class="protection-overlay">
-                                    <span class="watermark-text">iskrist4ll</span>
-                                </div>
+                                <div class="protection-overlay"></div>
                             </div>
 
                         </div>
@@ -197,9 +195,6 @@
             <button id="close-btn" style="font-family: monospace; background: #e6f0fa; color: #618ec7; border: 1px solid #d0e1fd; border-radius: 3px; padding: 2px 6px; cursor: pointer;">✖ CLOSE</button>
             <div class="lightbox-wrapper">
                 <img id="lightbox-img" src="" alt="Expanded Art" style="border: 1px solid #e6f0fa; display: block;">
-                <div class="protection-overlay">
-                    <span class="watermark-text">iskrist4ll</span>
-                </div>
             </div>
         </div>
     </div>
@@ -207,4 +202,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
