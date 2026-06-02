@@ -87,7 +87,7 @@
             object-fit: cover;
         }
 
-        /* Base overlay styling (Hidden by default) */
+        /* Transparent Shield Layer */
         .protection-overlay {
             position: absolute;
             top: 4px;
@@ -95,38 +95,15 @@
             right: 4px;
             bottom: 4px;
             border-radius: 2px;
-            pointer-events: none;
-            display: none; /* Keeps it hidden during normal viewing */
-            align-items: center;
-            justify-content: center;
+            z-index: 10;
         }
 
-        .watermark-text {
-            display: none; /* Keeps it hidden during normal viewing */
-        }
-
-        /* SCREENSHOT ONLY DETECTION */
-        @media video, (display-mode: picture-in-picture) {
-            .protection-overlay {
-                display: flex !important;
-                background-image: 
-                    linear-gradient(to right, transparent 42%, rgba(123, 164, 219, 0.35) 42%, rgba(123, 164, 219, 0.35) 58%, transparent 58%),
-                    linear-gradient(to bottom, transparent 42%, rgba(123, 164, 219, 0.35) 42%, rgba(123, 164, 219, 0.35) 58%, transparent 58%) !important;
-                background-size: 60px 60px !important;
-                background-repeat: no-repeat !important;
-                background-position: center !important;
-            }
-
-            .watermark-text {
-                display: inline !important;
-                color: rgba(97, 142, 199, 0.7) !important;
-                font-family: monospace !important;
-                font-size: 10px !important;
-                font-weight: bold !important;
-                letter-spacing: 0.5px !important;
-                text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8) !important;
-                user-select: none !important;
-            }
+        .protection-overlay img {
+            width: 100% !important;
+            height: 100% !important;
+            opacity: 0 !important; /* Makes the top image completely transparent */
+            cursor: pointer;
+            -webkit-user-drag: element !important; /* Forces the browser to drag the transparent shield instead */
         }
 
         /* sidebar links */
@@ -141,11 +118,18 @@
             color: #618ec7 !important;
         }
 
-        /* Lightbox specific watermark container styling */
+        /* Lightbox specific wrapper */
         .lightbox-wrapper {
             position: relative;
             display: inline-block;
             margin-top: 10px;
+        }
+
+        .lightbox-wrapper .protection-overlay {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
         }
     </style>
 </head>
@@ -183,9 +167,12 @@
                         <div class="gallery-grid">
                             
                             <div class="art-thumbnail">
+                                <!-- Your actual artwork remains behind the shield -->
                                 <img src="pinkneon.JPG" alt="Vent Art 1" class="zoomable">
+                                
+                                <!-- Transparent shield image placeholder -->
                                 <div class="protection-overlay">
-                                    <span class="watermark-text">iskrist4ll</span>
+                                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Shield">
                                 </div>
                             </div>
 
@@ -202,9 +189,12 @@
         <div id="lightbox-content" style="border: 1px solid #d0e1fd; background: #ffffff; padding: 10px; border-radius: 4px;">
             <button id="close-btn" style="font-family: monospace; background: #e6f0fa; color: #618ec7; border: 1px solid #d0e1fd; border-radius: 3px; padding: 2px 6px; cursor: pointer;">✖ CLOSE</button>
             <div class="lightbox-wrapper">
+                <!-- Actual artwork in popup -->
                 <img id="lightbox-img" src="" alt="Expanded Art" style="border: 1px solid #e6f0fa; display: block;">
+                
+                <!-- Transparent shield image placeholder for popup -->
                 <div class="protection-overlay">
-                    <span class="watermark-text" style="font-size: 14px;">iskrist4ll</span>
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Shield">
                 </div>
             </div>
         </div>
