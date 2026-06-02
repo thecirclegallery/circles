@@ -87,7 +87,7 @@
             object-fit: cover;
         }
 
-        /* Clean overlay style with medical cross watermark */
+        /* Base overlay styling (Hidden by default) */
         .protection-overlay {
             position: absolute;
             top: 4px;
@@ -95,30 +95,38 @@
             right: 4px;
             bottom: 4px;
             border-radius: 2px;
-            pointer-events: auto; /* Keeps image right-click protected if needed */
-            display: flex;
+            pointer-events: none;
+            display: none; /* Keeps it hidden during normal viewing */
             align-items: center;
             justify-content: center;
-            
-            /* CSS Medical Cross Shape */
-            background-image: 
-                linear-gradient(to right, transparent 42%, rgba(123, 164, 219, 0.25) 42%, rgba(123, 164, 219, 0.25) 58%, transparent 58%),
-                linear-gradient(to bottom, transparent 42%, rgba(123, 164, 219, 0.25) 42%, rgba(123, 164, 219, 0.25) 58%, transparent 58%);
-            background-size: 60px 60px;
-            background-repeat: no-repeat;
-            background-position: center;
         }
 
-        /* Watermark text format */
         .watermark-text {
-            color: rgba(97, 142, 199, 0.6);
-            font-family: monospace;
-            font-size: 10px;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
-            pointer-events: none;
-            user-select: none;
+            display: none; /* Keeps it hidden during normal viewing */
+        }
+
+        /* SCREENSHOT ONLY DETECTION */
+        @media video, (display-mode: picture-in-picture) {
+            .protection-overlay {
+                display: flex !important;
+                background-image: 
+                    linear-gradient(to right, transparent 42%, rgba(123, 164, 219, 0.35) 42%, rgba(123, 164, 219, 0.35) 58%, transparent 58%),
+                    linear-gradient(to bottom, transparent 42%, rgba(123, 164, 219, 0.35) 42%, rgba(123, 164, 219, 0.35) 58%, transparent 58%) !important;
+                background-size: 60px 60px !important;
+                background-repeat: no-repeat !important;
+                background-position: center !important;
+            }
+
+            .watermark-text {
+                display: inline !important;
+                color: rgba(97, 142, 199, 0.7) !important;
+                font-family: monospace !important;
+                font-size: 10px !important;
+                font-weight: bold !important;
+                letter-spacing: 0.5px !important;
+                text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8) !important;
+                user-select: none !important;
+            }
         }
 
         /* sidebar links */
