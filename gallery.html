@@ -60,6 +60,8 @@
         .gallery-grid {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap; /* Allows art to flow to the next line automatically */
+            gap: 15px; /* Adds space between your art pieces */
             padding: 10px 0;
         }
 
@@ -181,6 +183,11 @@
                                 <div class="protection-overlay"></div>
                             </div>
 
+                            <div class="art-thumbnail">
+                                <img src="lod.jpg" alt="Circles Series 2" class="zoomable">
+                                <div class="protection-overlay"></div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -202,3 +209,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
