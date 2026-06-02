@@ -87,7 +87,7 @@
             object-fit: cover;
         }
 
-        /* Transparent Shield Layer */
+        /* Permanent Faint Watermark Overlay */
         .protection-overlay {
             position: absolute;
             top: 4px;
@@ -95,15 +95,28 @@
             right: 4px;
             bottom: 4px;
             border-radius: 2px;
-            z-index: 10;
+            pointer-events: none; /* Allows clicks to pass through to the zoom script */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            /* Ultra-faint medical cross (0.08 opacity so it is barely there) */
+            background-image: 
+                linear-gradient(to right, transparent 42%, rgba(123, 164, 219, 0.08) 42%, rgba(123, 164, 219, 0.08) 58%, transparent 58%),
+                linear-gradient(to bottom, transparent 42%, rgba(123, 164, 219, 0.08) 42%, rgba(123, 164, 219, 0.08) 58%, transparent 58%);
+            background-size: 60px 60px;
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
-        .protection-overlay img {
-            width: 100% !important;
-            height: 100% !important;
-            opacity: 0 !important; /* Makes the top image completely transparent */
-            cursor: pointer;
-            -webkit-user-drag: element !important; /* Forces the browser to drag the transparent shield instead */
+        /* Faint Watermark Text */
+        .watermark-text {
+            color: rgba(97, 142, 199, 0.15); /* Soft, low-visibility text */
+            font-family: monospace;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            user-select: none;
         }
 
         /* sidebar links */
@@ -167,12 +180,9 @@
                         <div class="gallery-grid">
                             
                             <div class="art-thumbnail">
-                                <!-- Your actual artwork remains behind the shield -->
                                 <img src="pinkneon.JPG" alt="Vent Art 1" class="zoomable">
-                                
-                                <!-- Transparent shield image placeholder -->
                                 <div class="protection-overlay">
-                                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Shield">
+                                    <span class="watermark-text">iskrist4ll</span>
                                 </div>
                             </div>
 
@@ -189,12 +199,9 @@
         <div id="lightbox-content" style="border: 1px solid #d0e1fd; background: #ffffff; padding: 10px; border-radius: 4px;">
             <button id="close-btn" style="font-family: monospace; background: #e6f0fa; color: #618ec7; border: 1px solid #d0e1fd; border-radius: 3px; padding: 2px 6px; cursor: pointer;">✖ CLOSE</button>
             <div class="lightbox-wrapper">
-                <!-- Actual artwork in popup -->
                 <img id="lightbox-img" src="" alt="Expanded Art" style="border: 1px solid #e6f0fa; display: block;">
-                
-                <!-- Transparent shield image placeholder for popup -->
                 <div class="protection-overlay">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Shield">
+                    <span class="watermark-text" style="font-size: 14px; color: rgba(97, 142, 199, 0.15);">iskrist4ll</span>
                 </div>
             </div>
         </div>
