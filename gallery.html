@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art Gallery ✧.*</title>
+    <title>Art Archive ✧.*</title>
     <link rel="stylesheet" href="style.css">
     
     <style>
@@ -87,9 +87,38 @@
             object-fit: cover;
         }
 
-        /* Clean overlay style */
+        /* Clean overlay style with medical cross watermark */
         .protection-overlay {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
             border-radius: 2px;
+            pointer-events: auto; /* Keeps image right-click protected if needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            /* CSS Medical Cross Shape */
+            background-image: 
+                linear-gradient(to right, transparent 42%, rgba(123, 164, 219, 0.25) 42%, rgba(123, 164, 219, 0.25) 58%, transparent 58%),
+                linear-gradient(to bottom, transparent 42%, rgba(123, 164, 219, 0.25) 42%, rgba(123, 164, 219, 0.25) 58%, transparent 58%);
+            background-size: 60px 60px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* Watermark text format */
+        .watermark-text {
+            color: rgba(97, 142, 199, 0.6);
+            font-family: monospace;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+            user-select: none;
         }
 
         /* sidebar links */
@@ -102,6 +131,13 @@
         .links-list a:hover {
             background: #f4f9fc !important;
             color: #618ec7 !important;
+        }
+
+        /* Lightbox specific watermark container styling */
+        .lightbox-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -140,7 +176,9 @@
                             
                             <div class="art-thumbnail">
                                 <img src="pinkneon.JPG" alt="Vent Art 1" class="zoomable">
-                                <div class="protection-overlay"></div>
+                                <div class="protection-overlay">
+                                    <span class="watermark-text">iskrist4ll</span>
+                                </div>
                             </div>
 
                         </div>
@@ -155,7 +193,12 @@
     <div id="lightbox" class="hidden">
         <div id="lightbox-content" style="border: 1px solid #d0e1fd; background: #ffffff; padding: 10px; border-radius: 4px;">
             <button id="close-btn" style="font-family: monospace; background: #e6f0fa; color: #618ec7; border: 1px solid #d0e1fd; border-radius: 3px; padding: 2px 6px; cursor: pointer;">✖ CLOSE</button>
-            <img id="lightbox-img" src="" alt="Expanded Art" style="margin-top: 10px; border: 1px solid #e6f0fa;">
+            <div class="lightbox-wrapper">
+                <img id="lightbox-img" src="" alt="Expanded Art" style="border: 1px solid #e6f0fa; display: block;">
+                <div class="protection-overlay">
+                    <span class="watermark-text" style="font-size: 14px;">iskrist4ll</span>
+                </div>
+            </div>
         </div>
     </div>
 
