@@ -3,15 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Art ✧.*</title>
+    <title>Art Archive ✧.*</title>
     <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Medical-Core & Minimalist Overrides for this page only */
+        body {
+            background-color: #f4f9fc !important; /* Soft clinical white-blue background */
+        }
+
+        #top-banner {
+            background: #ffffff !important;
+            border: 1px solid #d0e1fd !important;
+            box-shadow: none !important;
+        }
+
+        #top-banner h1 {
+            color: #7ba4db !important; /* Medical blue title */
+            font-family: monospace;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+
+        /* Clean, sterile look for the layout boxes */
+        .cute-box {
+            background: #ffffff !important;
+            border: 1px solid #d0e1fd !important;
+            border-radius: 4px !important; /* Sharper, cleaner corners */
+            box-shadow: none !important;
+        }
+
+        .box-title {
+            background-color: #e6f0fa !important; /* Sterile light blue header bar */
+            color: #618ec7 !important;
+            font-family: monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #d0e1fd !important;
+            padding: 4px 8px !important;
+        }
+
+        .box-content {
+            background: #ffffff !important;
+            border: none !important;
+        }
+
+        .intro-text {
+            color: #8fa7c5 !important;
+            font-family: monospace;
+            font-size: 11px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Minimalist Gallery Grid */
+        .gallery-grid {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        /* Circular Art Thumbnail Frame */
+        .art-thumbnail {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 2px solid #d0e1fd; /* Clean clinical blue rim */
+            padding: 4px;
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s ease;
+        }
+
+        .art-thumbnail:hover {
+            border-color: #7ba4db; /* Darkens slightly on hover */
+        }
+
+        .art-thumbnail img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Clean overlay style */
+        .protection-overlay {
+            border-radius: 50%;
+        }
+
+        /* Medical blue styling for the sidebar links */
+        .links-list a {
+            color: #7ba4db !important;
+            font-family: monospace;
+            font-size: 11px;
+            border-bottom: 1px dashed #e6f0fa !important;
+        }
+        .links-list a:hover {
+            background: #f4f9fc !important;
+            color: #618ec7 !important;
+        }
+    </style>
 </head>
 <body>
 
     <div id="site-wrapper">
         
         <header id="top-banner">
-            <h1>*ೃ༄ kittens gallery ✧.*</h1>
+            <h1>[ ART.ARCHIVE ]</h1>
         </header>
 
         <div id="layout-columns">
@@ -19,7 +118,7 @@
             <aside id="sidebar">
 
                 <div class="cute-box">
-                    <div class="box-title">🧸 Navigation 🧸</div>
+                    <div class="box-title">+ Navigation +</div>
                     <div class="box-content links-list">
                         <a href="index.html">⟡ Home</a>
                         <a href="gallery.html">⟡ Gallery</a>
@@ -33,9 +132,9 @@
             <main id="main-content">
                 
                 <div class="cute-box">
-                    <div class="box-title">🌸 Gallery 🌸</div>
+                    <div class="box-title">+ Clinical Specimens +</div>
                     <div class="box-content">
-                        <p class="intro-text">Click on any circle to view it closer.</p>
+                        <p class="intro-text">select a specimen to expand view.</p>
                         
                         <div class="gallery-grid">
                             
@@ -53,10 +152,11 @@
         </div>
     </div>
 
+    <!-- Lightbox remains intact for viewing the art full size -->
     <div id="lightbox" class="hidden">
-        <div id="lightbox-content">
-            <button id="close-btn">✖ CLOSE</button>
-            <img id="lightbox-img" src="" alt="Expanded Art">
+        <div id="lightbox-content" style="border: 1px solid #d0e1fd; background: #ffffff; padding: 10px; border-radius: 4px;">
+            <button id="close-btn" style="font-family: monospace; background: #e6f0fa; color: #618ec7; border: 1px solid #d0e1fd; border-radius: 3px; padding: 2px 6px; cursor: pointer;">✖ CLOSE</button>
+            <img id="lightbox-img" src="" alt="Expanded Art" style="margin-top: 10px; border: 1px solid #e6f0fa;">
         </div>
     </div>
 
